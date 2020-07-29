@@ -44,9 +44,11 @@ func (cli *CLI) Run() {
 		err := addBlockCmd.Parse(os.Args[2:])
 		CheckErr("Run()", err)
 		if addBlockCmd.Parsed() {
-			if *addBlockCmdPara != "" {
-				cli.AddBlock(*addBlockCmdPara)
+			if *addBlockCmdPara == "" {
+				fmt.Println("addBlock data should not be empty!")
+				cli.PrintUsage()
 			}
+			cli.AddBlock(*addBlockCmdPara)
 		}
 	case PrintChainCmdString:
 		// 打印输出
